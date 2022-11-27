@@ -36,20 +36,53 @@ la actividad.
 #define MAXCADENA 20
 void pintaMenu();
 int pideNumEntreRango(int, int, int *);
+void nuevoAlumno(char[MAXALUMNOS][MAXCADENA], int *);
+// void listarAlumnos(char[][], int *);
 
 int main()
 {
-int num;
-char vNombreCompleto[MAXALUMNOS][MAXCADENA];
+	int num;
+	char vNombreCompleto[MAXALUMNOS][MAXCADENA];
+	int numE = 0;
 
+	// do
+	// {
 
-	printf("BIENVENIDOS AL PROGRAMA GESTION NOMBRE ALUMNOS:\n");
+		printf("BIENVENIDOS AL PROGRAMA GESTION NOMBRE ALUMNOS:\n");
 
-	pintaMenu();
-	pideNumEntreRango(0, 3, &num);
+		pintaMenu();
+		int option = pideNumEntreRango(0, 3, &num);
+		
+		
+
+		switch (option)
+		{
+		case 1:
+			nuevoAlumno(vNombreCompleto, &numE);
+			break;
+			// case 2:
+			// 	void listarAlumnos(vNombreCompleto, &numE);
+			// 	break;
+			// case 3:
+			// 	void listarAlumnos(vNombreCompleto, &numE);
+			// 	modificarAlumno(vNombreCompleto, numE);
+			// }
+			if (option != 0)
+			{
+				getch();
+				system("cls");
+			}
+		}
+
+	// } while (option != 0);
+	// {
+	// 	system("cls");
+	// 	printf("Has salido del programa.\n");
+	// 	system("pause");
+	// }
+	// 
 
 	getch();
-
 	return 0;
 }
 
@@ -57,14 +90,39 @@ void pintaMenu()
 {
 	printf("\n0.Salir.\n1.Insertar un alumno.\n2.Listar alumnos.\n3.Modificar nombre de un alumno.\n");
 }
-int pideNumEntreRango(int min,int  max, int *num)
+int pideNumEntreRango(int min, int max, int *num)
 {
-	
+
 	do
 	{
 		printf("\nSeleccione una opcion (0-3): \n");
 		scanf("%d", &*num);
-	} while (*num < 0 || *num > 3);
+	} while (*num < min || *num > max);
 
-	return num;
+	return *num;
+}
+void nuevoAlumno(char v[MAXALUMNOS][MAXCADENA], int *numE)
+{
+
+	for (int i = 0; i < 10; i++)
+	{
+		printf("Introduce el nombre de un alumno: ");
+		fflush(stdin);
+		fgets(v[i], MAXCADENA, stdin);
+		*numE++;
+	}
+}
+void listarAlumnos(char vNombreCompleto[MAXALUMNOS][MAXCADENA], int *numE)
+{
+	for (int i = 0; i <= *numE; i++)
+	{
+		if (*numE == 0)
+		{
+			printf("\nNo hay alumnos en la lista.");
+		}
+		else
+		{
+			printf("%d. %s\n", i, vNombreCompleto[i], MAXCADENA, stdin);
+		}
+	}
 }
